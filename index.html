@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cage Soundscape - Indeterministic Music Generator</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fa-solid fa-waveform me-2"></i>
+                Cage Soundscape
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Soundscape</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fa-solid fa-random me-2"></i>
+                            Indeterministic Soundscape
+                        </h4>
+                        <div>
+                            <button id="startButton" class="btn btn-success">
+                                <i class="fa-solid fa-play me-1"></i> Start
+                            </button>
+                            <button id="stopButton" class="btn btn-danger" disabled>
+                                <i class="fa-solid fa-stop me-1"></i> Stop
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <div id="visualizer-container" class="border rounded p-3">
+                                    <div id="visualizer-canvas"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="current-state mb-3">
+                                    <h5>Current Data Sources</h5>
+                                    <div id="current-data-display" class="data-display p-2 mb-3">
+                                        <p>Waiting for data...</p>
+                                    </div>
+                                </div>
+                                <div class="data-params">
+                                    <h5>Sound Parameters</h5>
+                                    <div id="sound-params-display" class="data-display p-2">
+                                        <p>Waiting for sound engine...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Data Sources</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="weatherDataToggle" checked>
+                                            <label class="form-check-label" for="weatherDataToggle">
+                                                <i class="fa-solid fa-cloud me-1"></i> Weather Data
+                                            </label>
+                                        </div>
+                                        
+                                        <div id="weatherControls">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" id="cityInput" placeholder="Enter city" value="New York">
+                                                <button class="btn btn-outline-secondary" type="button" id="fetchWeatherBtn">
+                                                    <i class="fa-solid fa-search me-1"></i> Fetch
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="microphoneToggle">
+                                            <label class="form-check-label" for="microphoneToggle">
+                                                <i class="fa-solid fa-microphone me-1"></i> Microphone Input
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="randomDataToggle" checked>
+                                            <label class="form-check-label" for="randomDataToggle">
+                                                <i class="fa-solid fa-dice me-1"></i> Random Data
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Sound Controls</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="masterVolumeSlider" class="form-label d-flex justify-content-between">
+                                                <span>Master Volume</span>
+                                                <span id="masterVolumeValue">75%</span>
+                                            </label>
+                                            <input type="range" class="form-range" id="masterVolumeSlider" min="0" max="100" value="75">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="densitySlider" class="form-label d-flex justify-content-between">
+                                                <span>Note Density</span>
+                                                <span id="densityValue">50%</span>
+                                            </label>
+                                            <input type="range" class="form-range" id="densitySlider" min="0" max="100" value="50">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="tempoOffsetSlider" class="form-label d-flex justify-content-between">
+                                                <span>Tempo Offset</span>
+                                                <span id="tempoOffsetValue">0</span>
+                                            </label>
+                                            <input type="range" class="form-range" id="tempoOffsetSlider" min="-50" max="50" value="0">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="reverbSlider" class="form-label d-flex justify-content-between">
+                                                <span>Reverb</span>
+                                                <span id="reverbValue">50%</span>
+                                            </label>
+                                            <input type="range" class="form-range" id="reverbSlider" min="0" max="100" value="50">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Cage Soundscape</h5>
+                    <p>An indeterministic music generator inspired by John Cage.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Created with <i class="fa-solid fa-heart text-danger"></i> for experimental music</p>
+                    <p class="small">Uses real-time data streams for unpredictable sound generation</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+    
+    <!-- D3.js for visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Tone.js for audio -->
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/data_sources.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/visualizer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/soundscape.js') }}"></script>
+</body>
+</html>

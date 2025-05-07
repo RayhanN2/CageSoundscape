@@ -1,0 +1,85 @@
+/* Custom CSS styles building on Bootstrap */
+
+/* Visualizer container */
+#visualizer-container {
+    min-height: 300px;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#visualizer-canvas {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+}
+
+/* Data display areas */
+.data-display {
+    min-height: 120px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.data-display p {
+    margin-bottom: 0.3rem;
+}
+
+/* Blockquote styling */
+blockquote {
+    font-style: italic;
+}
+
+/* Control panel effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px rgba(100, 100, 255, 0.1);
+}
+
+/* Animation for active soundscape */
+@keyframes soundscape-active {
+    0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); }
+    100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.2); }
+}
+
+.soundscape-active {
+    animation: soundscape-active 2s infinite;
+}
+
+/* Parameter values emphasis */
+.param-value {
+    font-weight: bold;
+    color: var(--bs-info);
+}
+
+/* Footer styling */
+footer {
+    margin-top: 2rem;
+}
+
+/* Range slider custom styles */
+.form-range::-webkit-slider-thumb {
+    background: var(--bs-info);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--bs-info);
+}
+
+/* Make card headers slightly different from card bodies */
+.card-header {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar brand emphasis */
+.navbar-brand {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}

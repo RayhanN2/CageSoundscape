@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Cage Soundscape</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fa-solid fa-waveform me-2"></i>
+                Cage Soundscape
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Soundscape</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">About the Project</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Indeterministic Music in the Style of John Cage</h5>
+                        <p>
+                            This web application generates indeterministic soundscapes inspired by the pioneering 
+                            work of American composer John Cage (1912-1992). The project reimagines Cage's 
+                            experimental approach to music using modern technology and real-time data streams.
+                        </p>
+                        
+                        <h5>John Cage and Chance Operations</h5>
+                        <p>
+                            John Cage was known for his innovative use of chance operations in musical composition. 
+                            In works like "Imaginary Landscape No. 4" (1951), which used 12 radios tuned randomly, 
+                            and his famous "4'33"" (1952), Cage challenged conventional notions of musical composition 
+                            and performance.
+                        </p>
+                        <p>
+                            Cage often used the I Ching (an ancient Chinese divination text) to make compositional 
+                            decisions, embracing unpredictability and ambient sounds as integral elements of music. 
+                            He was particularly interested in removing the composer's intentions from the creative process, 
+                            allowing sounds to exist for themselves rather than as vehicles for human expression.
+                        </p>
+                        
+                        <h5>Our Digital Approach</h5>
+                        <p>
+                            This application translates Cage's philosophy to the digital realm by:
+                        </p>
+                        <ul>
+                            <li>Using real-time weather data as an unpredictable input source</li>
+                            <li>Incorporating microphone input to capture ambient sounds</li>
+                            <li>Employing algorithmic processes that introduce chance operations</li>
+                            <li>Creating unique musical experiences that can never be exactly repeated</li>
+                            <li>Visualizing the sound generation process in real-time</li>
+                        </ul>
+                        
+                        <h5>How It Works</h5>
+                        <p>
+                            The application generates sound by mapping real-time data to musical parameters:
+                        </p>
+                        <ul>
+                            <li><strong>Temperature</strong> influences pitch range</li>
+                            <li><strong>Humidity</strong> affects reverb amount</li>
+                            <li><strong>Wind speed</strong> controls tempo</li>
+                            <li><strong>Cloud coverage</strong> determines filter frequency</li>
+                            <li><strong>Barometric pressure</strong> impacts note density</li>
+                            <li><strong>Weather conditions</strong> select different musical scales</li>
+                        </ul>
+                        
+                        <p>
+                            The result is a constantly evolving soundscape that reflects both natural data patterns 
+                            and chance operations, creating a unique listening experience each time.
+                        </p>
+                        
+                        <blockquote class="blockquote border-start border-secondary ps-4 my-4">
+                            <p>"I have nothing to say and I am saying it and that is poetry as I need it."</p>
+                            <footer class="blockquote-footer">John Cage</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">How to Use the Soundscape Generator</h4>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li class="mb-2">Press the <strong>Start</strong> button to begin generating sound</li>
+                            <li class="mb-2">Select different data sources:
+                                <ul>
+                                    <li>Enter a city name and click "Fetch" to use weather data from that location</li>
+                                    <li>Enable microphone input to incorporate ambient sounds (requires permission)</li>
+                                    <li>Toggle random data for additional variability</li>
+                                </ul>
+                            </li>
+                            <li class="mb-2">Adjust sound controls to shape the experience:
+                                <ul>
+                                    <li>Master Volume controls overall output level</li>
+                                    <li>Note Density adjusts how frequently notes are triggered</li>
+                                    <li>Tempo Offset speeds up or slows down the rhythm</li>
+                                    <li>Reverb controls the sense of space</li>
+                                </ul>
+                            </li>
+                            <li class="mb-2">Watch the visualizer to see a representation of the sound being generated</li>
+                            <li class="mb-2">Press the <strong>Stop</strong> button when you're done</li>
+                        </ol>
+                        
+                        <p class="alert alert-info">
+                            <i class="fa-solid fa-info-circle me-2"></i>
+                            Each listening session is unique and cannot be exactly reproduced - embrace the unexpected!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Cage Soundscape</h5>
+                    <p>An indeterministic music generator inspired by John Cage.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Created with <i class="fa-solid fa-heart text-danger"></i> for experimental music</p>
+                    <p class="small">Uses real-time data streams for unpredictable sound generation</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
